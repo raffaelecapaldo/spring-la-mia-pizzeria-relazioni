@@ -1,0 +1,57 @@
+.card-img-top {
+    height: 15rem;
+    object-fit: cover;
+}
+
+#search {
+    width: 18rem;
+}
+
+.card-body {
+    background-color: #ffce00;
+}
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #4e4337;
+    --bs-btn-border-color: #4e4337;
+    --bs-btn-hover-color: #342d25;
+    --bs-btn-hover-bg: #342d25;
+    --bs-btn-hover-border-color: #342d25;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #4e4337;
+    --bs-btn-active-border-color: #4e4337;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #4e4337;
+    --bs-btn-disabled-border-color: #4e4337;
+}
+
+.btn-primary:hover {
+    color:white;
+}
+
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://static.vecteezy.com/ti/foto-gratuito/p2/2386338-sfondo-o-struttura-legno-marrone-gratuito-foto.jpg");
+
+}
+
+.text-yellow {
+    color:#f5ba18;
+}
+
+.my-form {
+    background-color: #ffce00;
+    border-radius: 10px;
+    border:2px white solid;
+}
+
+#add-button {
+    top: 13px;
+    right: 10px;
+}
+
+.delete-form {
+	display:inline-block;
+}

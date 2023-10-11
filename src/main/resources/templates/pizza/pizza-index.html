@@ -1,0 +1,41 @@
+<th:block th:replace="frags :: head('Lista pizze')">
+</th:block>
+<body>
+    <header>
+        <div class="position-relative">
+        <h1 class="text-yellow text-center">Gestione pizze</h1>
+        <a class="btn btn-warning position-absolute" id="add-button" th:href="@{/pizzas/create}">Aggiungi una pizza</a>
+    </div>
+    </header>
+    <main>
+        <div class="container-fluid">
+			<div th:if="${deleteMessage != undefined}" class="d-flex justify-content-center">
+			<div th:text="${deleteMessage}" class="alert alert-success" role="alert">
+					</div>
+				</div>
+            <div class="d-flex justify-content-center">
+                <form id="search">
+                    <div class="input-group mb-3">
+                        <input name="name" type="text" th:value="${name}" class="form-control" placeholder="Trova una pizza">
+                        <button class="btn btn-danger" type="submit">Cerca</button>
+                      </div>
+                </form>
+            </div>
+         
+            <div th:if="${#lists.isEmpty(pizzas)}">
+            <h3 class="text-center text-yellow">Nessuna pizza trovata</h3>
+            </div>
+            <div th:if="${!#lists.isEmpty(pizzas)}" class="row">
+                <div 
+                th:each="pizza : ${pizzas}"
+                class="col-xl-3 col-lg-4 col-md-6 col-sm-6 d-flex justify-content-center mb-3"
+                th:insert="frags :: bsCard(pizza)">            
+                </div>
+            </div>
+        </div>
+    </main> 
+    
+		<script th:src="@{/js/form.js}"></script>
+</body>
+
+</html>

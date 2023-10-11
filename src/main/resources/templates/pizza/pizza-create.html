@@ -1,0 +1,50 @@
+<th:block th:replace="frags :: head('Aggiungi pizza')">
+</th:block>
+<body>
+    <header>
+        <h1 th:text="${pizza.id < 1 ? 'Crea una nuova pizza' : 'Modifica la pizza con ID: ' + pizza.id}" class="text-center text-yellow mb-3"></h1>
+    </header>
+    <main>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+			<!-- REQUIRED E VALIDAZIONI HTML5 ULTERIORE NON INSERITE PER ESPLICITA VALIDAZIONE BACKEND-ONLY -->
+                <form class="p-4 my-form" method="post" th:object="${pizza}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" class="form-control" for="name" placeholder="Nome della pizza" th:field="*{name}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid': ''}">
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}">
+                            <p th:each="err : ${#fields.errors('name')}" th:text="${err}" class="m-0 text-danger"></p>
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="description" class="form-label">Descrizione</label>
+                        <textarea type="text" class="form-control" for="description" placeholder="Aggiungi informazioni sulla pizza" th:field="*{description}" th:classappend="${#fields.hasErrors('description') ? 'is-invalid': ''}" ></textarea>
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('description')}">
+                            <p th:each="err : ${#fields.errors('description')}" th:text="${err}" class="m-0 text-danger"></p>
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="url" class="form-label">URL dell'immagine</label>
+                        <input type="text" class="form-control" for="imageUrl" th:field="*{imageUrl}" placeholder="Inserisci URL" th:classappend="${#fields.hasErrors('imageUrl') ? 'is-invalid': ''}">
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('imageUrl')}">
+                            <p th:each="err : ${#fields.errors('imageUrl')}" th:text="${err}" class="m-0 text-danger"></p>
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="price" class="form-label">Prezzo &euro;</label>
+                        <input type="number" class="form-control" for="price" th:field="*{price}" step=".01" th:classappend="${#fields.hasErrors('price') ? 'is-invalid': ''}" >
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('price')}">
+                            <p th:each="err : ${#fields.errors('price')}" th:text="${err}" class="m-0 text-danger"></p>
+                          </div>
+                      </div>
+                      <div class="mb-3 d-flex">
+                        <button th:text="${pizza.id < 1 ? 'Aggiungi' : 'Modifica'}" type="submit" class="btn btn-primary me-2"></button>
+                        <a th:href="@{/pizzas}" class="btn btn-danger">Indietro</a>  
+                      </div>
+                </form>
+                
+            </div>
+        </div>
+    </main> 
+</body>
+</html>

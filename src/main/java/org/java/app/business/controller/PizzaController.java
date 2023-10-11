@@ -3,7 +3,9 @@ package org.java.app.business.controller;
 import java.util.List;
 
 import org.java.app.business.db.pojo.Pizza;
+import org.java.app.business.db.pojo.SpecialOffer;
 import org.java.app.business.db.serv.PizzaService;
+import org.java.app.business.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,9 @@ public class PizzaController {
 
 	@Autowired
 	private PizzaService pizzaService;
+	
+	@Autowired
+	private SpecialOfferService specialOfferService;
 	
 	@GetMapping
 	public String getIndex(Model model, @RequestParam(required = false) String name) {
@@ -85,6 +90,44 @@ public class PizzaController {
 		return "redirect:/pizzas";
 	}
 	
+	@GetMapping("/{id}/addOffer")
+	public String getOfferCreateForm(@PathVariable int id, Model model) {
+		Pizza pizza = pizzaService.findById(id);
+		model.addAttribute("pizza", pizza);
+		model.addAttribute("specialOffer", new SpecialOffer());
+		
+		return "offer/offer-create";
+	}
+	
+	@GetMapping("/{pizza_id}/editOffer/{id}")
+	public String getOfferEditForm(@PathVariable int id, @PathVariable("pizza_id") int pizzaId,
+			Model model) {
+		Pizza pizza = pizzaService.findById(pizzaId);
+		SpecialOffer specialOffer = specialOfferService.findById(id);
+		model.addAttribute("pizza", pizza);
+		model.addAttribute("specialOffer", specialOffer);
+		
+		return "offer/offer-create";
+	}
+	
+	@PostMapping("/{pizza_id}/editOffer/{id}")
+	public String updateOffer(@Valid @ModelAttribute SpecialOffer specialOffer, BindingResult bindingResult,
+			Model model, @PathVariable("pizza_id") int pizzaId) {
+		
+		return saveOffer(specialOffer, bindingResult, model, pizzaId);
+
+	}
+
+	
+	@PostMapping("/{pizza_id}/addOffer")
+	public String storeBorrowing(
+			@Valid @ModelAttribute SpecialOffer specialOffer, BindingResult bindingResult,			
+			@PathVariable("pizza_id") int id, Model model) {
+		
+		return saveOffer(specialOffer, bindingResult, model, id);
+	}
+	
+	
 	private String savePizza(Pizza pizza, BindingResult bindingResult, Model model, 
 			RedirectAttributes ra, boolean isNew) {
 		if (bindingResult.hasErrors()) {
@@ -99,6 +142,24 @@ public class PizzaController {
 			pizzaService.save(pizza);
 			return "redirect:/pizzas/" + pizza.getId();
 
+		}
+		
+		
+	}
+	
+	private String saveOffer(SpecialOffer specialOffer, BindingResult bindingResult, Model model, int pizzaId) {
+		Pizza pizza = pizzaService.findById(pizzaId);
+
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("pizza", pizza); //per titolo pagina
+			return "offer/offer-create";
+		}
+		else {
+		
+		specialOffer.setPizza(pizza);
+		specialOfferService.save(specialOffer);
+		
+		return "redirect:/pizzas/" + pizzaId;
 		}
 	}}
 	

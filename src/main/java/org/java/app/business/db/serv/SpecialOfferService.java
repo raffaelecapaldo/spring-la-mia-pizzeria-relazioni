@@ -1,5 +1,6 @@
 package org.java.app.business.db.serv;
 
+import org.java.app.business.db.pojo.Pizza;
 import org.java.app.business.db.pojo.SpecialOffer;
 import org.java.app.business.db.repo.SpecialOfferRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,10 @@ public class SpecialOfferService {
 	
 	public void save(SpecialOffer specialOffer) {
 		specialOfferRepo.save(specialOffer);
+	}
+	
+	public SpecialOffer findById(int id) {
+		return specialOfferRepo.findById(id).get();
 	}
 
 }

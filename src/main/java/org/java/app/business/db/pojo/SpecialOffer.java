@@ -46,7 +46,7 @@ public class SpecialOffer {
 	}
 
 
-	private static DateTimeFormatter itaFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	private static DateTimeFormatter itaFormatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
 	
 	public SpecialOffer() { }
 	public SpecialOffer(String title, LocalDate startDate, LocalDate endDate, Pizza pizza) {

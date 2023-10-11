@@ -2,7 +2,7 @@
 </th:block>
 <body>
     <header>
-        <h1 th:text="${specialOffer.id < 1 ? 'Crea una nuova offerta' : 'Modifica offerta con ID: ' + specialOffer.id}" class="text-center text-yellow mb-3"></h1>
+        <h1 th:text="${specialOffer.id < 1 ? 'Crea una nuova offerta per la pizza ' + pizza.name : 'Modifica offerta con ID: ' + specialOffer.id}" class="text-center text-yellow mb-3"></h1>
     </header>
     <main>
         <div class="container-fluid">
@@ -11,21 +11,21 @@
                 <form class="p-4 my-form" method="post" th:object="${specialOffer}">
                     <div class="mb-3">
                         <label for="name" class="form-label">Titolo</label>
-                        <input type="text" class="form-control" for="title" placeholder="Titolo dell'offerta" th:field="*{title}" th:classappend="${#fields.hasErrors('title') ? 'is-invalid': ''}">
+                        <input type="text" class="form-control" name="title" placeholder="Titolo dell'offerta" th:field="*{title}" th:classappend="${#fields.hasErrors('title') ? 'is-invalid': ''}">
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('title')}">
                             <p th:each="err : ${#fields.errors('title')}" th:text="${err}" class="m-0 text-danger"></p>
                           </div>
                       </div>
                       <div class="mb-3">
                         <label for="startDate" class="form-label">Data di inizio</label>
-                        <input type="date" class="form-control" for="startDate" th:field="*{startDate}" th:classappend="${#fields.hasErrors('startDate') ? 'is-invalid': ''}">
+                        <input type="date" class="form-control" name="startDate" th:value="*{htmlStartDate}" th:classappend="${#fields.hasErrors('startDate') ? 'is-invalid': ''}">
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('startDate')}">
                             <p th:each="err : ${#fields.errors('startDate')}" th:text="${err}" class="m-0 text-danger"></p>
                           </div>
                       </div>
                       <div class="mb-3">
                         <label for="endDate" class="form-label">Data di fine</label>
-                        <input type="date" class="form-control" for="endDate" th:field="*{endDate}" th:classappend="${#fields.hasErrors('endDate') ? 'is-invalid': ''}">
+                        <input type="date" class="form-control" name="endDate" th:value="*{htmlEndDate}" th:classappend="${#fields.hasErrors('endDate') ? 'is-invalid': ''}">
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('endDate')}">
                             <p th:each="err : ${#fields.errors('endDate')}" th:text="${err}" class="m-0 text-danger"></p>
                           </div>

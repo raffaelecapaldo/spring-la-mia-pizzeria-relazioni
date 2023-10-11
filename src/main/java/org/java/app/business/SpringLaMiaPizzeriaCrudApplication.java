@@ -1,7 +1,11 @@
 package org.java.app.business;
 
+import java.time.LocalDate;
+
 import org.java.app.business.db.pojo.Pizza;
+import org.java.app.business.db.pojo.SpecialOffer;
 import org.java.app.business.db.serv.PizzaService;
+import org.java.app.business.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +16,9 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner  {
 	
 	@Autowired
 	private PizzaService pizzaService;
+	
+	@Autowired
+	private SpecialOfferService specialOfferService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -31,6 +38,18 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner  {
 		pizzaService.save(pizza3);
 		pizzaService.save(pizza4);
 		pizzaService.save(pizza5);
+		
+		SpecialOffer sp1 = new SpecialOffer("Due pizza al prezzo di una", LocalDate.now(), LocalDate.now().plusDays(2), pizza1);
+		SpecialOffer sp2 = new SpecialOffer("Bibite gratis", LocalDate.now(), LocalDate.now().plusDays(2), pizza1);
+		SpecialOffer sp3 = new SpecialOffer("Buono sconto 20% prossimo ordine", LocalDate.now(), LocalDate.now().plusDays(2), pizza2);
+
+		
+
+		specialOfferService.save(sp1);
+		specialOfferService.save(sp2);
+		specialOfferService.save(sp3);
+
+		
 
 		//pizzaService.findAll().forEach(p -> System.out.println(p));
 		

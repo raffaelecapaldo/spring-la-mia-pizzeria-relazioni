@@ -41,6 +41,12 @@ public class Pizza {
 	private List<SpecialOffer> specialOffers;
 
 	
+	public List<SpecialOffer> getSpecialOffers() {
+		return specialOffers;
+	}
+	public void setSpecialOffers(List<SpecialOffer> specialOffers) {
+		this.specialOffers = specialOffers;
+	}
 	public Pizza() { }
 	public Pizza(String name, String description, String imageUrl, float price) throws Exception {
 		setName(name);

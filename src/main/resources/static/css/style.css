@@ -55,3 +55,8 @@ body {
 .delete-form {
 	display:inline-block;
 }
+
+.offer-table {
+    width: 500px;
+    margin-top:5px;
+}

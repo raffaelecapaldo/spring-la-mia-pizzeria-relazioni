@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +28,7 @@ public class SpecialOffer {
 	@Column(length = 100, nullable = false)
 	@Length(min = 3, max = 100, message = "Il nome dell'offerta deve avere una lunghezza dai 3 ai 100 caratteri")
 	private String title;
-	@FutureOrPresent @NotEmpty @NotNull
+	@FutureOrPresent @NotNull
 	private LocalDate startDate;
 	@FutureOrPresent @Nullable
 	private LocalDate endDate;
@@ -36,10 +37,23 @@ public class SpecialOffer {
 	@JoinColumn(nullable = false)
 	private Pizza pizza;
 	
+	
+	public Pizza getPizza() {
+		return pizza;
+	}
+	public void setPizza(Pizza pizza) {
+		this.pizza = pizza;
+	}
+
+
 	private static DateTimeFormatter itaFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
 	public SpecialOffer() { }
-	public SpecialOffer(String title, LocalDate startDate, LocalDate endDate) {
+	public SpecialOffer(String title, LocalDate startDate, LocalDate endDate, Pizza pizza) {
+		setTitle(title);
+		setStartDate(startDate);
+		setEndDate(endDate);
+		setPizza(pizza);
 		
 	}
 	public int getId() {

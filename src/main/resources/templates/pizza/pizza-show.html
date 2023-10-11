@@ -10,14 +10,42 @@
 			<div th:text="${updateMessage}" class="alert alert-success" role="alert">
 					</div>
 				</div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center mb-3">
 					
                 <div
                 th:insert="frags :: bsCard(${pizza})">
-                               <a th:replace="frags :: buttonr('Torna indietro', @{/pizzas})"></a>  
+                <a th:replace="frags :: buttonr('Torna indietro', @{/pizzas})"></a>  
          
                 </div>
+
                 
+                
+            </div>
+
+            <h4 class="text-center text-yellow">Lista offerta speciali</h4>
+            <div class="d-flex justify-content-center">
+                <div th:if="${#lists.isEmpty(pizza.specialOffers)}" class="alert alert-light" role="alert">
+                    Non ci sono offerte speciali per questa pizza
+                  </div>
+                <table th:if="${!#lists.isEmpty(pizza.specialOffers)}"
+                 class="table offer-table table-primary">
+                    <thead>
+                      <tr>
+                        <th scope="col">Titolo</th>
+                        <th scope="col">Data inizio</th>
+                        <th scope="col">Data fine</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr  
+                      th:each="offer : ${pizza.specialOffers}"
+                      th:object="${offer}">
+                         <td>[[*{title}]]</td>
+                        <td>[[*{htmlStartDate}]]</td>
+                        <td>[[*{htmlEndDate}]]</td>
+                      </tr>
+                    </tbody>
+                  </table>
             </div>
         </div>
     </main> 

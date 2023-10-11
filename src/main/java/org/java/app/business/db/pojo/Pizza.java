@@ -1,6 +1,8 @@
 package org.java.app.business.db.pojo;
 
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.annotation.Nonnull;
@@ -10,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 
@@ -21,7 +24,7 @@ public class Pizza {
 	private int id;
 	
 	@Column(length = 100, nullable = false)
-	@Length(min = 3, max = 100, message = "Il nome può avere soltanto una lunghezza dai 3 ai 100 caratteri")
+	@Length(min = 3, max = 100, message = "Il nome deve avere una lunghezza dai 3 ai 100 caratteri")
 	private String name;
 	@Nullable
 	@Length(max = 255, message = "La descrizione non può essere più lunga di 255 caratteri")
@@ -33,6 +36,10 @@ public class Pizza {
 	@Column(nullable = false)
 	@DecimalMin(value = "0.01", message = "Il prezzo della pizza non può essere zero o inferiore")
 	private float price;
+	
+	@OneToMany(mappedBy = "pizza")
+	private List<SpecialOffer> specialOffers;
+
 	
 	public Pizza() { }
 	public Pizza(String name, String description, String imageUrl, float price) throws Exception {

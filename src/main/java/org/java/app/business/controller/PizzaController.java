@@ -91,11 +91,7 @@ public class PizzaController {
 	public String deletePizza(@PathVariable int id, RedirectAttributes ra) {
 		Pizza pizza = pizzaService.findById(id);
 		//Cancello le offerte di questa pizza per evitare errori nel DB
-		List<SpecialOffer> specialOffersOfPizza = pizza.getSpecialOffers();
-		for (SpecialOffer sp : specialOffersOfPizza) {
-			specialOfferService.delete(sp);
-		}
-		
+		pizzaService.deleteAllOffers(pizza);
 		ra.addFlashAttribute("deleteMessage", "Pizza con ID: " + pizza.getId() + " (" + pizza.getName() + ") cancellata");
 		pizzaService.delete(pizza);
 		return "redirect:/pizzas";

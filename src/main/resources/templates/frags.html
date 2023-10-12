@@ -19,7 +19,8 @@
     <div th:fragment="bsCard(pizza)" class="card" style="width: 18rem;">
         <img th:src="${pizza.imageUrl != '' ? pizza.imageUrl : 'https://rejse-glæde.dk/wp-content/themes/klikko3_b_18_07_2023/dest/images/no-image.png'}" class="card-img-top" th:alt="${pizza.name}">
         <div class="card-body">
-          <h5 th:text="${pizza.name}" class="card-title"></h5>
+		  <h5 th:text="${'ID ' + pizza.id}" class="card-title"></h5>
+          <h4 th:text="${pizza.name}" class="card-title"></h4>
           <p th:if="${pizzas == null}" th:text="${pizza.description}" class="card-text"></p>
           <p th:if="${pizzas == null}" th:text="'Prezzo: ' + ${#numbers.formatDecimal(pizza.price/100, 0, 'COMMA', 2, 'COMMA')} + '&euro;'" class="card-text"></p>
           <a th:if="${pizzas != null}" th:href="@{/pizzas/{id}(id=*{pizza.id})}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>

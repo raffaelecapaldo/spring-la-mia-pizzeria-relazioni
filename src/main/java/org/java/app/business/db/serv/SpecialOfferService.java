@@ -1,6 +1,5 @@
 package org.java.app.business.db.serv;
 
-import org.java.app.business.db.pojo.Pizza;
 import org.java.app.business.db.pojo.SpecialOffer;
 import org.java.app.business.db.repo.SpecialOfferRepo;
 import org.springframework.beans.factory.annotation.Autowired;

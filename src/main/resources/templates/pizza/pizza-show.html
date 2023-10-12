@@ -34,6 +34,7 @@
                  class="table offer-table table-primary">
                     <thead>
                       <tr>
+						<th scope="col">ID</th>
                         <th scope="col">Titolo</th>
                         <th scope="col">Data inizio</th>
                         <th scope="col">Data fine</th>
@@ -44,6 +45,7 @@
                       <tr  
                       th:each="offer : ${pizza.specialOffers}"
                       th:object="${offer}">
+                         <td>[[*{id}]]</td>
                          <td>[[*{title}]]</td>
                         <td>[[*{htmlStartDate}]]</td>
                         <td>[[*{htmlEndDate}]]</td>

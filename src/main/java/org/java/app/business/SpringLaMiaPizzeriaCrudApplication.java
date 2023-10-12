@@ -2,8 +2,10 @@ package org.java.app.business;
 
 import java.time.LocalDate;
 
+import org.java.app.business.db.pojo.Ingredient;
 import org.java.app.business.db.pojo.Pizza;
 import org.java.app.business.db.pojo.SpecialOffer;
+import org.java.app.business.db.serv.IngredientService;
 import org.java.app.business.db.serv.PizzaService;
 import org.java.app.business.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner  {
 	@Autowired
 	private SpecialOfferService specialOfferService;
 	
+	@Autowired
+	private IngredientService ingredientService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
 	}
@@ -27,11 +32,22 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner  {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Pizza pizza1 = new Pizza("Margherita", "La pizza più semplice", "/img/pizza-margherita.jpg", 4.50f);
-		Pizza pizza2 = new Pizza("Capricciosa", "Ogni sfizio è un capriccio", "/img/pizza-capricciosa.jpg", 8.50f);
-		Pizza pizza3 = new Pizza("Marinara", "Per stare leggero", "/img/pizza-marinara.jpg", 6f);
-		Pizza pizza4 = new Pizza("Napoli", "Con le acciughe fresche", "/img/pizza-napoli.webp", 8f);
-		Pizza pizza5 = new Pizza("Wurstel e patatine", "Per tutte le età", "/img/pizza-wurstel.jpg", 5.50f);
+		Ingredient pomodoro = new Ingredient("Pomodoro");
+		Ingredient mozzarella = new Ingredient("Mozzarella");
+		Ingredient acciughe = new Ingredient("Acciughe");
+		Ingredient wurstel = new Ingredient("Wurstel");
+		
+		ingredientService.save(pomodoro);
+		ingredientService.save(mozzarella);
+		ingredientService.save(acciughe);
+		ingredientService.save(wurstel);
+
+		
+		Pizza pizza1 = new Pizza("Margherita", "La pizza più semplice", "/img/pizza-margherita.jpg", 4.50f, pomodoro, mozzarella);
+		Pizza pizza2 = new Pizza("Capricciosa", "Ogni sfizio è un capriccio", "/img/pizza-capricciosa.jpg", 8.50f, pomodoro, mozzarella);
+		Pizza pizza3 = new Pizza("Marinara", "Per stare leggero", "/img/pizza-marinara.jpg", 6f, pomodoro);
+		Pizza pizza4 = new Pizza("Napoli", "Con le acciughe fresche", "/img/pizza-napoli.webp", 8f, pomodoro, acciughe);
+		Pizza pizza5 = new Pizza("Wurstel e patatine", "Per tutte le età", "/img/pizza-wurstel.jpg", 5.50f, wurstel);
 
 		pizzaService.save(pizza1);
 		pizzaService.save(pizza2);

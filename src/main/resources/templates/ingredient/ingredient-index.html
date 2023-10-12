@@ -4,5 +4,33 @@
     <header>
         <nav th:replace="frags:: navbar"></nav>
     </header>
-    
+    <main>
+        <div class="position-relative">
+            <h1 class="text-yellow text-center">Gestione ingredienti</h1>
+            <a class="btn btn-warning position-absolute" id="add-button" th:href="@{/ingredients/create}">Aggiungi un ingrediente</a>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div th:if="${#lists.isEmpty(ingredients)}" class="alert alert-light" role="alert">
+                Non ci sono ancora ingredienti nel database
+              </div>
+            <table th:if="${!#lists.isEmpty(ingredients)}"
+             class="table offer-table table-primary text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  
+                  th:each="ingredient : ${ingredients}"
+                  th:object="${ingredient}">
+                     <td class="w-50">[[*{id}]]</td>
+                     <td class="w-50">[[*{name}]]</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </main>
 </body>

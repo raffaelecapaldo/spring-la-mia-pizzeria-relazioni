@@ -51,7 +51,7 @@ public class IngredientController {
 			} catch (DataIntegrityViolationException e) {
 				model.addAttribute("nameNotUnique", "Ingrediente con nome già esistente");
 				 return "ingredient/ingredient-create";			}
-			ra.addFlashAttribute("addedMessage", "Ingrediente aggiunto correttamente");
+			ra.addFlashAttribute("updateMessage", "Ingrediente aggiunto correttamente");
 			return "redirect:/ingredients";
 		}
 		
@@ -62,7 +62,8 @@ public class IngredientController {
 		Ingredient ingredient = ingredientService.findById(id);
 		ingredientService.removeAllPizzas(ingredient);
 		ingredientService.delete(ingredient);
-		
+		ra.addFlashAttribute("updateMessage", "Ingrediente rimosso correttamente");
+
 		return "redirect:/ingredients";
 	}
 	

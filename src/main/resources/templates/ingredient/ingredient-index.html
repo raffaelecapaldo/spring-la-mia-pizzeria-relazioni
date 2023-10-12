@@ -12,14 +12,8 @@
                 ingrediente</a>
         </div>
 
-        <div th:if="${addedMessage != undefined}" class="d-flex justify-content-center">
-            <div th:text="${addedMessage}" class="alert alert-success" role="alert">
-            </div>
-        </div>
-
-
-        <div th:if="${deleteMessage != undefined}" class="d-flex justify-content-center">
-            <div th:text="${deleteMessage}" class="alert alert-danger" role="alert">
+        <div th:if="${updateMessage != undefined}" class="d-flex justify-content-center">
+            <div th:text="${updateMessage}" class="alert alert-success" role="alert">
             </div>
         </div>
 

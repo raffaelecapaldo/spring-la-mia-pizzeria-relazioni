@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 
@@ -25,7 +26,8 @@ public class SpecialOfferController {
 	@Autowired
 	private PizzaService pizzaService;
 	
-	private String saveOffer(SpecialOffer specialOffer, BindingResult bindingResult, Model model, int pizzaId) {
+	private String saveOffer(SpecialOffer specialOffer, BindingResult bindingResult, Model model,
+			int pizzaId, RedirectAttributes ra, boolean isNew) {
 		Pizza pizza = pizzaService.findById(pizzaId);
 
 		if (bindingResult.hasErrors()) {
@@ -33,6 +35,10 @@ public class SpecialOfferController {
 			return "offer/offer-create";
 		}
 		else {
+			ra.addFlashAttribute("updateMessage", "Offerta speciale " + (isNew ? 
+					"creata " :
+					"modificata ")
+				+ "correttamente!");
 		
 		specialOffer.setPizza(pizza);
 		specialOfferService.save(specialOffer);
@@ -63,9 +69,9 @@ public class SpecialOfferController {
 	
 	@PostMapping("/{pizza_id}/editOffer/{id}")
 	public String updateOffer(@Valid @ModelAttribute SpecialOffer specialOffer, BindingResult bindingResult,
-			Model model, @PathVariable("pizza_id") int pizzaId) {
+			Model model, RedirectAttributes ra, @PathVariable("pizza_id") int pizzaId) {
 		
-		return saveOffer(specialOffer, bindingResult, model, pizzaId);
+		return saveOffer(specialOffer, bindingResult, model, pizzaId, ra, false);
 
 	}
 
@@ -73,8 +79,8 @@ public class SpecialOfferController {
 	@PostMapping("/{pizza_id}/addOffer")
 	public String storeBorrowing(
 			@Valid @ModelAttribute SpecialOffer specialOffer, BindingResult bindingResult,			
-			@PathVariable("pizza_id") int id, Model model) {
+			@PathVariable("pizza_id") int id, Model model, RedirectAttributes ra) {
 		
-		return saveOffer(specialOffer, bindingResult, model, id);
+		return saveOffer(specialOffer, bindingResult, model, id, ra, true);
 	}
 }

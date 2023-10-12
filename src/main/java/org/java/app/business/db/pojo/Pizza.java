@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
-import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Min;
 
 @Entity
 public class Pizza {
@@ -53,7 +51,7 @@ public class Pizza {
 		this.specialOffers = specialOffers;
 	}
 	
-
+	
 	public Pizza() { }
 	public Pizza(String name, String description, String imageUrl, float price,
 			Ingredient...ingredients) throws Exception {

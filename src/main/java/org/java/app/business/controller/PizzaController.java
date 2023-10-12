@@ -3,10 +3,8 @@ package org.java.app.business.controller;
 import java.util.List;
 
 import org.java.app.business.db.pojo.Pizza;
-import org.java.app.business.db.pojo.SpecialOffer;
 import org.java.app.business.db.serv.IngredientService;
 import org.java.app.business.db.serv.PizzaService;
-import org.java.app.business.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +27,7 @@ public class PizzaController {
 	private PizzaService pizzaService;
 	@Autowired
 	private IngredientService ingredientService;
-	@Autowired
-	private SpecialOfferService specialOfferService;
+
 	
 	@GetMapping
 	public String getIndex(Model model, @RequestParam(required = false) String name) {

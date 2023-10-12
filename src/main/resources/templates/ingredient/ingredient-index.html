@@ -44,10 +44,15 @@
                   th:object="${ingredient}">
                      <td >[[*{id}]]</td>
                      <td >[[*{name}]]</td>
-                     <td><button></button></td>
+                     <td>
+                        <form class="delete-form" th:action="@{/ingredients/delete/{id}(id=*{id})}" method="POST">
+                        <a class="btn btn-danger delete-button"><i class="fa-regular fa-trash-can"></i></a>  
+                       </form>
+                    </td>
                   </tr>
                 </tbody>
               </table>
         </div>
     </main>
+    <script th:src="@{/js/form.js}"></script>
 </body>

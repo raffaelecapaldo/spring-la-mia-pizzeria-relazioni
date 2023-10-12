@@ -18,5 +18,9 @@ public class SpecialOfferService {
 	public SpecialOffer findById(int id) {
 		return specialOfferRepo.findById(id).get();
 	}
+	
+	public void delete(SpecialOffer specialOffer) {
+		specialOfferRepo.delete(specialOffer);
+	}
 
 }

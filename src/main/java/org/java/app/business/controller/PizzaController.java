@@ -3,8 +3,10 @@ package org.java.app.business.controller;
 import java.util.List;
 
 import org.java.app.business.db.pojo.Pizza;
+import org.java.app.business.db.pojo.SpecialOffer;
 import org.java.app.business.db.serv.IngredientService;
 import org.java.app.business.db.serv.PizzaService;
+import org.java.app.business.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,8 @@ public class PizzaController {
 	private PizzaService pizzaService;
 	@Autowired
 	private IngredientService ingredientService;
+	@Autowired
+	private SpecialOfferService specialOfferService;
 	
 	@GetMapping
 	public String getIndex(Model model, @RequestParam(required = false) String name) {
@@ -86,6 +90,12 @@ public class PizzaController {
 	@PostMapping("/delete/{id}")
 	public String deletePizza(@PathVariable int id, RedirectAttributes ra) {
 		Pizza pizza = pizzaService.findById(id);
+		//Cancello le offerte di questa pizza per evitare errori nel DB
+		List<SpecialOffer> specialOffersOfPizza = pizza.getSpecialOffers();
+		for (SpecialOffer sp : specialOffersOfPizza) {
+			specialOfferService.delete(sp);
+		}
+		
 		ra.addFlashAttribute("deleteMessage", "Pizza con ID: " + pizza.getId() + " (" + pizza.getName() + ") cancellata");
 		pizzaService.delete(pizza);
 		return "redirect:/pizzas";

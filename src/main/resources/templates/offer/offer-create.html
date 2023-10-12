@@ -1,4 +1,4 @@
-<th:block th:replace="frags :: head('Aggiungi pizza')">
+<th:block th:replace="frags :: head(${specialOffer.id < 1 ? 'Crea una nuova offerta per la pizza ' + pizza.name : 'Modifica offerta con ID: ' + specialOffer.id})">
 </th:block>
 <body>
     <header>

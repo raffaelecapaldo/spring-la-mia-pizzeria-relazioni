@@ -111,4 +111,13 @@ public class SpecialOffer {
 		this.endDate = endDate;
 	}
 	
+	@Override
+	public String toString() {
+		return "[ID]: " + getId() + "\n"
+				+ "[Title]: " + getTitle() + "\n"
+				+ "[Start date]: " + getHtmlStartDate() + "\n"
+				+ "[End date]: " + getHtmlEndDate() + "\n"
+				+ "[Pizza ID]: " + getPizza().getId();
+	}
+	
 }

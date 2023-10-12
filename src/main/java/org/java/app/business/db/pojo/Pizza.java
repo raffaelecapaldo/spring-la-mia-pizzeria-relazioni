@@ -67,6 +67,19 @@ public class Pizza {
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
+	
+	public boolean hasIngredient(Ingredient ingredient) {
+			
+			if (getIngredients() == null) return false;
+			
+			for (Ingredient ingr : getIngredients()) 
+				if (ingr.getId() == ingredient.getId())
+					return true;
+			
+			return false;
+		}
+
+
 	public int getId() {
 		return id;
 	}

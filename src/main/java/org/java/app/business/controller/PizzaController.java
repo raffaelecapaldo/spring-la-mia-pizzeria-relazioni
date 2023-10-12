@@ -3,6 +3,7 @@ package org.java.app.business.controller;
 import java.util.List;
 
 import org.java.app.business.db.pojo.Pizza;
+import org.java.app.business.db.serv.IngredientService;
 import org.java.app.business.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ public class PizzaController {
 
 	@Autowired
 	private PizzaService pizzaService;
+	@Autowired
+	private IngredientService ingredientService;
 	
 	@GetMapping
 	public String getIndex(Model model, @RequestParam(required = false) String name) {
@@ -50,6 +53,7 @@ public class PizzaController {
 	@GetMapping("/create")
 	public String getCreateForm(Model model) {
 		
+		model.addAttribute("ingredients", ingredientService.findAll());
 		model.addAttribute("pizza", new Pizza());
 		
 		return "pizza/pizza-create";
@@ -69,10 +73,12 @@ public class PizzaController {
 
 	
 	@GetMapping("/update/{id}")
-	public String getBookUpdate(@PathVariable int id, Model model) {
+	public String getPizzaUpdate(@PathVariable int id, Model model) {
 		Pizza pizza = pizzaService.findById(id);
 		pizza.setPrice((pizza.getPrice() / 10000));
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("ingredients", ingredientService.findAll());
+
 		
 		return "pizza/pizza-create";
 	}

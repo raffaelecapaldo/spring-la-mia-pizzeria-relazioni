@@ -1,18 +1,22 @@
-<th:block th:replace="frags :: head(${pizza.id < 1 ? 'Crea una nuova pizza' : 'Modifica la pizza con ID: ' + pizza.id})">
+<th:block
+    th:replace="frags :: head(${pizza.id < 1 ? 'Crea una nuova pizza' : 'Modifica la pizza con ID: ' + pizza.id})">
 </th:block>
+
 <body>
     <header>
         <nav th:replace="frags:: navbar"></nav>
-        <h1 th:text="${pizza.id < 1 ? 'Crea una nuova pizza' : 'Modifica la pizza con ID: ' + pizza.id}" class="text-center text-yellow mb-3"></h1>
+        <h1 th:text="${pizza.id < 1 ? 'Crea una nuova pizza' : 'Modifica la pizza con ID: ' + pizza.id}"
+            class="text-center text-yellow mb-3"></h1>
     </header>
     <main>
         <div class="container-fluid">
             <div class="d-flex justify-content-center">
-			<!-- REQUIRED E VALIDAZIONI HTML5 ULTERIORE NON INSERITE PER ESPLICITA VALIDAZIONE BACKEND-ONLY -->
+                <!-- REQUIRED E VALIDAZIONI HTML5 ULTERIORE NON INSERITE PER ESPLICITA VALIDAZIONE BACKEND-ONLY -->
                 <form class="p-4 my-form" method="post" th:object="${pizza}">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" for="name" placeholder="Nome della pizza" th:field="*{name}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid': ''}">
+                        <input type="text" class="form-control" for="name" placeholder="Nome della pizza"
+                            th:field="*{name}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid': ''}">
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}">
                             <p th:each="err : ${#fields.errors('name')}" th:text="${err}" class="m-0 text-danger"></p>
                           </div>
@@ -23,6 +27,23 @@
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('description')}">
                             <p th:each="err : ${#fields.errors('description')}" th:text="${err}" class="m-0 text-danger"></p>
                           </div>
+                      </div>
+                      <div class="mb-3">
+                        <p class="m-0">Ingredienti</p>
+                        <div
+                        th:each="ingredient : ${ingredients}"
+                        th:object="${ingredient}">
+                        <input 
+                            type="checkbox" 
+                            th:id="${'ingredient-' + ingredient.id}"
+                            th:value="*{id}"
+                            th:checked="${pizza.hasIngredient(ingredient)}"
+                            th:field="${pizza.ingredients}">
+                        <label
+                            th:for="${'ingredient-' + ingredient.id}">
+                            [[*{name}]]
+                        </label>
+                    </div>
                       </div>
                       <div class="mb-3">
                         <label for="url" class="form-label">URL dell'immagine</label>

@@ -2,6 +2,7 @@
 </th:block>
 <body>
     <header>
+        <nav th:replace="frags:: navbar"></nav>
         <h1 th:text="${specialOffer.id < 1 ? 'Crea una nuova offerta per la pizza ' + pizza.name : 'Modifica offerta con ID: ' + specialOffer.id}" class="text-center text-yellow mb-3"></h1>
     </header>
     <main>

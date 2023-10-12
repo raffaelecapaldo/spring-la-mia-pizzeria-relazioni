@@ -2,6 +2,7 @@
 </th:block>
 <body>
     <header>
+        <nav th:replace="frags:: navbar"></nav>
         <div class="position-relative">
         <h1 class="text-yellow text-center">Gestione pizze</h1>
         <a class="btn btn-warning position-absolute" id="add-button" th:href="@{/pizzas/create}">Aggiungi una pizza</a>

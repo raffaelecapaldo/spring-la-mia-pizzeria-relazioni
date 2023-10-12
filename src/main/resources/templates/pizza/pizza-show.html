@@ -21,7 +21,31 @@
                 
                 
             </div>
-
+          <!-- INGREDIENTS -->
+            <h4 class="text-center text-yellow">Lista ingredienti</h4>
+            <div class="d-flex justify-content-center">
+                <div th:if="${#lists.isEmpty(pizza.ingredients)}" class="alert alert-light" role="alert">
+                    Non ci sono ingredienti aggiungi a questa pizza
+                  </div>
+                <table th:if="${!#lists.isEmpty(pizza.ingredients)}"
+                 class="table offer-table table-primary text-center">
+                    <thead>
+                      <tr>
+						            <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr  
+                      th:each="ingredient : ${pizza.ingredients}"
+                      th:object="${ingredient}">
+                         <td class="w-50">[[*{id}]]</td>
+                         <td class="w-50">[[*{name}]]</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+                <!-- OFFERS  -->
             <h4 class="text-center text-yellow">Lista offerta speciali</h4>
             <div class="d-flex justify-content-center mb-1">
                 <a class="btn btn-warning" th:href="@{/pizzas/{id}/addOffer(id=*{id})}">Aggiungi un'offerta</a>
@@ -54,6 +78,8 @@
                     </tbody>
                   </table>
             </div>
+
+            
         </div>
     </main> 
 </body>

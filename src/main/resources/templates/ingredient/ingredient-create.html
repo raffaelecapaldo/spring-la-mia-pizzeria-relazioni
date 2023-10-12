@@ -1,0 +1,28 @@
+<th:block th:replace="frags :: head('Crea ingrediente')">
+</th:block>
+<body>
+    <header>
+        <nav th:replace="frags:: navbar"></nav>
+        <h1 th:text="${'Crea ingrediente'}" class="text-center text-yellow mb-3"></h1>
+    </header>
+    <main>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+			<!-- REQUIRED E VALIDAZIONI HTML5 ULTERIORE NON INSERITE PER ESPLICITA VALIDAZIONE BACKEND-ONLY -->
+                <form class="p-4 my-form" method="post" th:object="${ingredient}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" class="form-control" for="name" placeholder="Nome dell'ingrediente" th:field="*{name}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid': ''}">
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}">
+                            <p th:each="err : ${#fields.errors('name')}" th:text="${err}" class="m-0 text-danger"></p>
+                          </div>
+                      </div>
+                      <div class="mb-3 d-flex">
+                        <button type="submit" class="btn btn-primary me-2">Aggiungi</button>
+                        <a th:href="@{/ingredients}" class="btn btn-danger">Indietro</a>  
+                      </div>
+                </form>
+                
+            </div>
+        </div>
+    </main>

@@ -1,5 +1,6 @@
 <th:block th:replace="frags :: head('Lista ingredienti')">
 </th:block>
+
 <body>
     <header>
         <nav th:replace="frags:: navbar"></nav>
@@ -7,8 +8,21 @@
     <main>
         <div class="position-relative">
             <h1 class="text-yellow text-center">Gestione ingredienti</h1>
-            <a class="btn btn-warning position-absolute" id="add-button" th:href="@{/ingredients/create}">Aggiungi un ingrediente</a>
+            <a class="btn btn-warning position-absolute" id="add-button" th:href="@{/ingredients/create}">Aggiungi un
+                ingrediente</a>
         </div>
+
+        <div th:if="${addedMessage != undefined}" class="d-flex justify-content-center">
+            <div th:text="${addedMessage}" class="alert alert-success" role="alert">
+            </div>
+        </div>
+
+
+        <div th:if="${deleteMessage != undefined}" class="d-flex justify-content-center">
+            <div th:text="${deleteMessage}" class="alert alert-danger" role="alert">
+            </div>
+        </div>
+
 
         <div class="d-flex justify-content-center">
             <div th:if="${#lists.isEmpty(ingredients)}" class="alert alert-light" role="alert">
@@ -20,14 +34,17 @@
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Cancella</th>
+
                   </tr>
                 </thead>
                 <tbody>
                   <tr  
                   th:each="ingredient : ${ingredients}"
                   th:object="${ingredient}">
-                     <td class="w-50">[[*{id}]]</td>
-                     <td class="w-50">[[*{name}]]</td>
+                     <td >[[*{id}]]</td>
+                     <td >[[*{name}]]</td>
+                     <td><button></button></td>
                   </tr>
                 </tbody>
               </table>

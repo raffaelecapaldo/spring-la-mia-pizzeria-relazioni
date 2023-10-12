@@ -12,9 +12,12 @@
                 <form class="p-4 my-form" method="post" th:object="${ingredient}">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" for="name" placeholder="Nome dell'ingrediente" th:field="*{name}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid': ''}">
+                        <input type="text" class="form-control" for="name" placeholder="Nome dell'ingrediente" th:field="*{name}" th:classappend="${#fields.hasErrors('name') || nameNotUnique != null ? 'is-invalid': ''}">
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}">
                             <p th:each="err : ${#fields.errors('name')}" th:text="${err}" class="m-0 text-danger"></p>
+                          </div>
+                          <div class="alert alert-danger" role="alert" th:if="${nameNotUnique != null}">
+                            <p th:text="${nameNotUnique}" class="m-0 text-danger"></p>
                           </div>
                       </div>
                       <div class="mb-3 d-flex">

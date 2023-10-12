@@ -18,7 +18,7 @@ public class Ingredient {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(length = 100, nullable = false)
+	@Column(length = 100, nullable = false,unique = true)
 	@Length(min = 3, max = 100, message = "Il nome dell'ingrediente deve avere una lunghezza dai 3 ai 100 caratteri")
 	private String name;
 	
